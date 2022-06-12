@@ -66,7 +66,9 @@ function App() {
 
     <SafeAreaProvider>
       <NavigationContainer>
-        <TabScreens />
+        <View style={{top: 0, left: 0, right: 0, bottom: 0}}>
+          <TabScreens />
+        </View>
       </NavigationContainer>
     </SafeAreaProvider >
 
@@ -104,29 +106,31 @@ function TabScreens() {
   var inset = useSafeAreaInsets();
 
   return (
-    <Tab.Navigator
-      initialRouteName='Settings'
-      screenOptions={{}}
-      transitionStyle={'curl'}
-    >
-      <Tab.Screen
-        name='Live Data'
-        component={LiveData}
-        options={{ tabBarLabel: 'Live Data', lazy:true }}
-      />
-      <Tab.Screen
-        name='Logged Data'
-        component={LoggedData}
-        options={{ tabBarLabel: 'Logged Data' }}
+    <View >
+      <Tab.Navigator
+        initialRouteName='Live Data'
+        screenOptions={{}}
+        transitionStyle={'curl'}
+      >
+        <Tab.Screen
+          name='Live Data'
+          component={LiveData}
+          options={{ tabBarLabel: 'Live Data', lazy: true }}
+        />
+        <Tab.Screen
+          name='Logged Data'
+          component={LoggedData}
+          options={{ tabBarLabel: 'Logged Data' }}
 
-      />
-      <Tab.Screen
-        name='Settings'
-        component={SettingsPage}
-        options={{ tabBarLabel: 'Settings' }}
+        />
+        <Tab.Screen
+          name='Settings'
+          component={SettingsPage}
+          options={{ tabBarLabel: 'Settings' }}
 
-      />
-    </Tab.Navigator>
+        />
+      </Tab.Navigator>
+    </View>
   )
 
 }
