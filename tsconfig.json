@@ -6,7 +6,11 @@
     "strictFunctionTypes": true,
     "sourceMap": true,
     "outDir": "./build",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -19,6 +23,13 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "exclude": ["node_modules", "**/node_modules/*"],
-  "include": ["src", "electron/renderer.ts"]
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ],
+  "include": [
+    "src",
+    "electron/renderer.ts"
+  ],
+  "extends": "expo/tsconfig.base"
 }
