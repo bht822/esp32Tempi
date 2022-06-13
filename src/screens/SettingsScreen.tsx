@@ -1,25 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 //@ts-ignore
-import { Amplify, Auth, PubSub } from 'aws-amplify';
+import { Amplify, Auth } from 'aws-amplify';
 import { AWSIoTProvider } from '@aws-amplify/pubsub/lib/Providers';
 import { Card } from 'react-native-paper';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Device from 'expo-device';
-import tw from 'twrnc';
-import config from "../aws-exports";
-import React, { Component, useEffect, useState } from 'react';
-
-// Config
-// Amplify.configure({
-//     ...config,
-//     Analytics: {
-//         disabled: true,
-//     },
-// });
-var SUB_TOPIC = "esp32/pub";
-var PUB_TOPIC = "esp32/sub";
+import { useEffect, useState } from 'react';
 
 Amplify.addPluggable(new AWSIoTProvider({
     aws_pubsub_region: 'us-east-2',
@@ -47,18 +32,18 @@ const SettingsPage = () => {
 
         <View style={styles.container}>
             {/* ts-ignore */}
-            <Card style={{ width: '50%', height: '50%', alignItems: 'center', elevation: 10, borderRadius: '3%', justifyItems:'center' }}>
+            <Card style={{ width: '50%', height: '50%', alignItems: 'center', elevation: 10, borderRadius: 1, justifyItems: 'center' }}>
                 <Card.Content>
-                    <Text>
-                        Name: {userName}
+                    <Text style={{ fontWeight: "700" }}>
+                       Hello! {userName || ''}
                     </Text>
                     <TouchableOpacity
-                        style={{ backgroundColor: '#FF9900', alignItems:'center' }}
-                        onPress={()=>{
+                        style={{ backgroundColor: '#FF9900', alignItems: 'center', justifyContent: 'center', marginTop: '15%', borderRadius: 1, width: 100, height: 50 }}
+                        onPress={() => {
                             Auth.signOut();
                         }}
                     >
-                        <Text style={{ color:'white' }}>Sign Out</Text>
+                        <Text style={{ color: 'white' }}>Sign Out</Text>
                     </TouchableOpacity>
 
                 </Card.Content>
@@ -67,26 +52,6 @@ const SettingsPage = () => {
 
     );
 };
-
-
-function WebView() {
-    return (
-        <View >
-
-        </View>
-    )
-}
-
-function Mobile() {
-    return (
-        <View>
-            <Text>Mobile Live</Text>
-        </View>
-    )
-}
-
-
-
 
 // define your styles
 const styles = StyleSheet.create({

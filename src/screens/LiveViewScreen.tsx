@@ -1,23 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 //@ts-ignore
 import { Amplify, PubSub } from 'aws-amplify';
 import { AWSIoTProvider } from '@aws-amplify/pubsub/lib/Providers';
 import { Card } from 'react-native-paper';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import * as Device from 'expo-device';
 import tw from 'twrnc';
-import config from "../aws-exports";
-import React, { Component, useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 
-// Config
-// Amplify.configure({
-//     ...config,
-//     Analytics: {
-//         disabled: true,
-//     },
-// });
+import {
+    LineChart,
+} from "react-native-chart-kit";
+
 var SUB_TOPIC = "esp32/pub";
 var PUB_TOPIC = "esp32/sub";
 
@@ -32,21 +25,33 @@ const LiveData = () => {
     // Initialize state variables 
     const [temperature, setTemperature] = useState(0);
     const [time, setTime] = useState();
-    const [view, setView] = useState('')
+    //Time is 0 when the view origionally loads 
+    const [xaxis, _setx] = useState([0])
+    const [yaxis, _setY] = useState([0]);
+
+    var width = Dimensions.get('window').width;
+    var height = Dimensions.get('window').height;
+    var data = {
+        labels: xaxis,
+        datasets: [
+            {
+                data: yaxis,
+                color: (opacity = 1) => `rgba(0,0,0, ${opacity})`,
+                strokeWidth: 2 // optional
+            }
+        ],
+        legend: ["Temperature"] // optional
+    };
 
     //componentDidLoad() 
     useEffect(() => {
 
-        Device.getDeviceTypeAsync().then((type) => {
-            console.log(type)
-            type == Device.DeviceType.DESKTOP ? setView('web') : setView('mobile');
-
-        })
         const listener = PubSub.subscribe(SUB_TOPIC).subscribe({
             next: (data) => {
-                console.log(data)
+                // console.log(data)
                 setTemperature(data.value.temperature);
                 setTime(data.value.time)
+
             },
             error: error => console.log(error),
             complete() {
@@ -54,19 +59,52 @@ const LiveData = () => {
             },
 
         })
-        return()=>{
+        return () => {
             listener.unsubscribe();
         }
 
 
+
     }, [])
 
+    /**
+     * Update the temperature and also update LineChart Element when time changes
+     * @TODO: Add toggle button to toggle change with time or with temperature change
+     */
+    useEffect(() => {
+        yaxis.push(temperature)
+        xaxis.push(xaxis.length++)
+        UpdateChart();
+    }, [temperature])
+
+    const chartConfig = {
+        backgroundGradientFrom: "#5E2925",
+        backgroundGradientFromOpacity: 0,
+        backgroundGradientTo: "#08130D",
+        backgroundGradientToOpacity: 0.5,
+        color: (opacity = 1) => `rgba(0,0,0, ${opacity})`,
+        strokeWidth: 2, // optional, default 3
+        barPercentage: 0.5,
+        useShadowColorFromDataset: false // optional
+    };
+    var UpdateChart = () => {
+        return (
+            <LineChart
+                data={data}
+                width={width * 0.8}
+                height={height * 0.6}
+                chartConfig={chartConfig}
+            />
+        )
+    }
+
     return (
-        <View style={[tw`flex-1 items-center  justify-center width-100% height-100%`]}>
-            <Card>
+        <View style={{ alignSelf: 'center', alignContent:'center', justifyContent:'center' }}>
+            <UpdateChart  />
+            <Card style={{ width:'50%',height:'20%',alignSelf:'center', alignItems:'center', marginTop: '1%', elevation: 10 }}>
                 <Card.Content>
-                    <Text>Temp is: {temperature} </Text>
-                    <Text>Time is: {time} </Text>
+                    <Text style={{ fontWeight: "700" }}>Current Temperature is:{temperature} </Text>
+                    <Text style={{ fontWeight: "700" }}>Current Datapoint received is:{time} </Text>
                 </Card.Content>
             </Card>
             <StatusBar style="auto" />
@@ -75,40 +113,8 @@ const LiveData = () => {
 };
 
 
-// function WebView({ temperature, time }: any) {
-//     return (
-//         <View >
-//             <View style={[tw`flex-1 items-center  justify-center width-100% height-100%`]}>
-//                 <Card>
-//                     <Card.Content>
-//                         <Text>Temp is: {temperature} </Text>
-//                         <Text>Time is: {time} </Text>
-//                     </Card.Content>
-//                 </Card>
-//                 <StatusBar style="auto" />
-//             </View>
-//         </View>
-//     )
-// }
-
-// function Mobile({ temperature, time }: any) {
-//     return (
-//         <View>
-//             <Text>Mobile Live</Text>
-//         </View>
-//     )
-// }
-
-
-
-
-// define your styles
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // backgroundColor: '#2c3e50',
     },
 });
 
