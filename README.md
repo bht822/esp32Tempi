@@ -3,6 +3,20 @@ Tempi is a React-native app to display temperature data from an ESP32-WROOM deve
 The temperature is dispalyed in <b>Live mode </b> with the plot updating in realtime and logging mod to view the historical data.
 <span> ![Android](./assets/android.gif)  ![web](./assets/web.gif)</span>
 
+----------------------------------------
+
+## To run the app:
+#### Make sure you have Expo installed 
+[Expo](expo.dev)
+```
+- git clone git@github.com:bht822/iOT.git
+- npm install
+- expo install  #This ensure all node_modules are expo compatiable 
+- expo run web
+OR
+- expo run android -d NameOfTheDevice
+```
+
 ## System Flowchart
 ![Flowcahrt](./assets/Flowcharts.svg)
 
@@ -24,8 +38,8 @@ The temperature is dispalyed in <b>Live mode </b> with the plot updating in real
 --------------------
 
 ### @TO DO:<br/>
-🔴 Increase UX change colors and fonts <br/>
-🔴 Move the configuration valirables to parameter store or something similar <br/>
-🔴 Setup CI/CD for the web project and deploy the tempiBackend to server so it can be assesed from the apps<br/>
-🔴 Try using AWS Timestream for storing data this can also be tied into the AWS insight<br/>
-🔴 Write Unit tests<br/
+#### 🔴 Increase UX change colors and fonts <br/>
+#### 🔴 Move the configuration valirables to parameter store or something similar <br/>
+#### 🔴 Setup CI/CD for the web project and deploy the tempiBackend to server so it can be assesed from the apps<br/>
+#### 🔴 Try using AWS Timestream for storing data this can also be tied into the AWS insight<br/>
+#### 🔴 Write Unit tests<br/>
