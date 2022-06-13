@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, StatusBar } from 'react-native';
 //@ts-ignore
 import { Amplify, Auth } from 'aws-amplify';
 import { AWSIoTProvider } from '@aws-amplify/pubsub/lib/Providers';
@@ -35,7 +35,7 @@ const SettingsPage = () => {
             <Card style={{ width: '50%', height: '50%', alignItems: 'center', elevation: 10, borderRadius: 1, justifyItems: 'center' }}>
                 <Card.Content>
                     <Text style={{ fontWeight: "700" }}>
-                       Hello! {userName || ''}
+                        Hello! {userName || ''}
                     </Text>
                     <TouchableOpacity
                         style={{ backgroundColor: '#FF9900', alignItems: 'center', justifyContent: 'center', marginTop: '15%', borderRadius: 1, width: 100, height: 50 }}
@@ -48,6 +48,8 @@ const SettingsPage = () => {
 
                 </Card.Content>
             </Card>
+            <StatusBar style="auto" />
+
         </View>
 
     );

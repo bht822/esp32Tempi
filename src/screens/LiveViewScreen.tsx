@@ -25,7 +25,7 @@ const LiveData = () => {
     // Initialize state variables 
     const [temperature, setTemperature] = useState(0);
     const [time, setTime] = useState();
-    //Time is 0 when the view origionally loads 
+    //Time is 0 when the view originally loads 
     const [xaxis, _setx] = useState([0])
     const [yaxis, _setY] = useState([0]);
 
@@ -99,12 +99,12 @@ const LiveData = () => {
     }
 
     return (
-        <View style={{ alignSelf: 'center', alignContent:'center', justifyContent:'center' }}>
+        <View style={{ alignSelf: 'center', alignContent:'center', justifyContent:'center',marginTop: '3%' }}>
             <UpdateChart  />
-            <Card style={{ width:'50%',height:'20%',alignSelf:'center', alignItems:'center', marginTop: '1%', elevation: 10 }}>
+            <Card style={{ width:'50%',height:'10%',alignSelf:'center', alignItems:'center', marginTop: '1%', elevation: 10 }}>
                 <Card.Content>
-                    <Text style={{ fontWeight: "700" }}>Current Temperature is:{temperature} </Text>
-                    <Text style={{ fontWeight: "700" }}>Current Datapoint received is:{time} </Text>
+                    <Text style={{ fontWeight: "500" }}>Current Temperature is:{temperature} </Text>
+                    <Text style={{ fontWeight: "500" }}>Current Datapoint received is:{time} </Text>
                 </Card.Content>
             </Card>
             <StatusBar style="auto" />
