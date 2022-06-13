@@ -32,13 +32,13 @@ const SettingsPage = () => {
 
         <View style={styles.container}>
             {/* ts-ignore */}
-            <Card style={{ width: '50%', height: '50%', alignItems: 'center', elevation: 10, borderRadius: '3%', justifyItems: 'center' }}>
+            <Card style={{ width: '50%', height: '50%', alignItems: 'center', elevation: 10, borderRadius: 1, justifyItems: 'center' }}>
                 <Card.Content>
                     <Text style={{ fontWeight: "700" }}>
                        Hello! {userName || ''}
                     </Text>
                     <TouchableOpacity
-                        style={{ backgroundColor: '#FF9900', alignItems: 'center', justifyContent: 'center', marginTop: '15%', borderRadius: '20%', width: 100, height: 50 }}
+                        style={{ backgroundColor: '#FF9900', alignItems: 'center', justifyContent: 'center', marginTop: '15%', borderRadius: 1, width: 100, height: 50 }}
                         onPress={() => {
                             Auth.signOut();
                         }}

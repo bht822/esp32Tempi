@@ -46,14 +46,9 @@ const LiveData = () => {
     //componentDidLoad() 
     useEffect(() => {
 
-        // Device.getDeviceTypeAsync().then((type) => {
-        //     console.log(type)
-        //     type == Device.DeviceType.DESKTOP ? setView('web') : setView('mobile');
-
-        // })
         const listener = PubSub.subscribe(SUB_TOPIC).subscribe({
             next: (data) => {
-                console.log(data)
+                // console.log(data)
                 setTemperature(data.value.temperature);
                 setTime(data.value.time)
 
@@ -77,7 +72,6 @@ const LiveData = () => {
      * @TODO: Add toggle button to toggle change with time or with temperature change
      */
     useEffect(() => {
-        console.log("temp changed")
         yaxis.push(temperature)
         xaxis.push(xaxis.length++)
         UpdateChart();
@@ -105,12 +99,12 @@ const LiveData = () => {
     }
 
     return (
-        <View style={[tw` items-center  justify-center`, { width: '90%', alignSelf: 'center' }]}>
-            <UpdateChart />
-            <Card style={{ marginTop: '1%', elevation: 10, borderRadius: '3%', }}>
+        <View style={{ alignSelf: 'center', alignContent:'center', justifyContent:'center' }}>
+            <UpdateChart  />
+            <Card style={{ width:'50%',height:'20%',alignSelf:'center', alignItems:'center', marginTop: '1%', elevation: 10 }}>
                 <Card.Content>
-                    <Text style={{ fontWeight: "700" }}>Current Temperature  is:</Text> <Text>{temperature} </Text>
-                    <Text style={{ fontWeight: "700" }}>Current Datapoint received is:</Text> <Text>{time} </Text>
+                    <Text style={{ fontWeight: "700" }}>Current Temperature is:{temperature} </Text>
+                    <Text style={{ fontWeight: "700" }}>Current Datapoint received is:{time} </Text>
                 </Card.Content>
             </Card>
             <StatusBar style="auto" />
