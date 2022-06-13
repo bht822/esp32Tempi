@@ -3,7 +3,7 @@ Tempi is a React-native app to display temperature data from an ESP32-WROOM deve
 The temperature is dispalyed in <b>Live mode </b> with the plot updating in realtime and logging mod to view the historical data.
 
 ## System Flowchart
-![Flowcahrt](./assests/Flowcharts.svg)
+![Flowcahrt](./assets/Flowcharts.svg)
 
 ------------------------------------------------
 ## System Overview
