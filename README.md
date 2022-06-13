@@ -1,6 +1,7 @@
 # Tempi
 Tempi is a React-native app to display temperature data from an ESP32-WROOM developemnt board over to any device or over the web. <br/>
 The temperature is dispalyed in <b>Live mode </b> with the plot updating in realtime and logging mod to view the historical data.
+<span> ![Android](./assets/android.gif)  ![web](./assets/web.gif)</span>
 
 ## System Flowchart
 ![Flowcahrt](./assets/Flowcharts.svg)
@@ -20,4 +21,11 @@ The temperature is dispalyed in <b>Live mode </b> with the plot updating in real
 -----------------------------
 #### React-Native App for displaying the data. 
 * ##### This is where things get interesting. I have done a similar project with Angular and I was certian of the steps but the react-native cross platform compatibility was a challenge but being careful of the libraries used I was able to acheive this task farily well. I used tailwind for some css as well which worked very well.
+--------------------
 
+### @TO DO:<br/>
+🔴 Increase UX change colors and fonts <br/>
+🔴 Move the configuration valirables to parameter store or something similar <br/>
+🔴 Setup CI/CD for the web project and deploy the tempiBackend to server so it can be assesed from the apps<br/>
+🔴 Try using AWS Timestream for storing data this can also be tied into the AWS insight<br/>
+🔴 Write Unit tests<br/
